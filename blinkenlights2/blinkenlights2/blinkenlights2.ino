@@ -11,6 +11,8 @@
 #define CLOCK     3
 
 int clockState;
+int BPM;
+double quarterNoteDuration; // in ms
 
 void setup() {
 
@@ -27,11 +29,16 @@ void loop() {
 
   digitalWrite(CLOCK, (clockState++) % 2);
 
-  int val = analogRead(TEMPO_POT);
-  Serial.println(val);
+  BPM = analogRead(TEMPO_POT);
+  Serial.print(BPM);
+  Serial.print(" | | " );
+  BPM = map(BPM, 0, 1023, 80, 200);
+  Serial.print(BPM);
+  quarterNoteDuration = (60000)/(BPM*4);
+  Serial.print(" | | " );
+  Serial.println(quarterNoteDuration/1000);
+  delay(quarterNoteDuration);
 
-  delay(100);
-  
-  
+  // delay(quarterNoteDutration);
 
 }
