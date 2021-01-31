@@ -1,6 +1,6 @@
 /*
- * This sketch exists because I wnat to know, how 
- * the stuff with the LCDs worlks. 
+ * This sketch exists because I want to know, how 
+ * the stuff with the LCDs works. 
  * 
  * Also _some_ visual hints when debugging would be nice D:
  */
