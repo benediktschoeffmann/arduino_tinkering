@@ -21,3 +21,6 @@ I'll try to summarize each of these sketches a bit.
 
 	Test Sketch using a KDY-040 Encoder. Connect CLK, DT, SW to Pins 2,3,4 , respectively.
     
+- scales
+
+	Just a reprensation of intervales between notes in the modes - or "church" scales. 
