@@ -6,6 +6,8 @@
   #define ENCODER_PIN_DT  3 // Rotary Encoder Duty
   #define ENCODER_PIN_SW  4 // Rotary Encoder Button
 
+  /* Start / Stop Button */
+  #define START_PIN       6
 
   /* Pins for ST7735 */
   #define TFT_CS         10
