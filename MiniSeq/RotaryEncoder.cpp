@@ -149,12 +149,13 @@ unsigned char RotaryEncoder::process() {
   state = ttable[state & 0xf][pinstate];
 
   // read buttonpress - attention inverse logic
-  if (digitalRead(pin3) == LOW && ((millis() - lastEncoderClick) > DEBOUNCE_DELAY)) {
-    lastEncoderClick = millis();
-    state |= DIR_SW;
+  if (digitalRead(pin3) == LOW) {
+    if ((millis() - lastEncoderClick) > DEBOUNCE_DELAY) {
+      state |= DIR_SW;
+      lastEncoderClick = millis();
+    }
   }
-  
-  
+
   // Return emit bits, ie the generated event.
   return state & 0x70;
 }

@@ -22,7 +22,7 @@
 #define  DIR_CCW 0x20
 
 #define DIR_SW 0x40
-#define DEBOUNCE_DELAY 200
+#define DEBOUNCE_DELAY 400
 
 
 class RotaryEncoder
@@ -36,7 +36,7 @@ class RotaryEncoder
     unsigned char pin1;
     unsigned char pin2;
     unsigned char pin3;
-    long lastEncoderClick;
+    unsigned long lastEncoderClick;
 };
 
 #endif
