@@ -4,6 +4,22 @@
 Hi there, I just wanted to brush up my skills in C and Srduino tinkering. 
 I'll try to summarize each of these sketches a bit. 
 
+- 128x32 I2C Display
+  
+	Test Script for this display.
+
+- 4x7-Segment_Test
+
+	Test Script for this display. 
+
+- HD47780 Display
+
+	Test Script for this display.
+
+- ST7735S Display
+
+	Test Script for this display.
+
 
 - Blinkenlights:
 
@@ -24,3 +40,7 @@ I'll try to summarize each of these sketches a bit.
 - scales
 
 	Just a reprensation of intervales between notes in the modes - or "church" scales. 
+
+- Hagiwo 
+	
+	In this folder are various ino-files from https://www.youtube.com/channel/UCxErrnnVNEAAXPZvQFwobQw
