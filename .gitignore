@@ -1,1 +1,8 @@
 arduino_libraries/
+Arduino-MIDI-Clocker/
+Arduino-VDCO/
+MCVGO/
+libraries/
+test_samples/
+Buxtronix/
+LCDemoMatrix/
