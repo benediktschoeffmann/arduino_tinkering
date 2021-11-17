@@ -1,0 +1,27 @@
+Knobs: 
+Tune
+VCF Cutoff
+VCF Resonance
+VCF Amount
+LFO 
+OSC/VCF
+ADSR Attack
+ADSR Decay
+
+Buttons 
+Rec
+Play
+Stop
+Tempo -
+Tempo +
+Octave -
+Octave +
+Sync  
+Cue 
+Wav
+Acc
+Slide 
+Clear
+
+Next
+Func
