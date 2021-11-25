@@ -10,6 +10,9 @@
 #include "databus/Arduino_ESP32PAR16.h"
 #include "databus/Arduino_ESP32PAR16Q.h"
 #include "databus/Arduino_ESP32PAR16QQ.h"
+#include "databus/Arduino_ESP32S2PAR8.h"
+#include "databus/Arduino_ESP32S2PAR16.h"
+#include "databus/Arduino_ESP32S2PAR16Q.h"
 #include "databus/Arduino_ESP32SPI.h"
 #include "databus/Arduino_ESP8266SPI.h"
 #include "databus/Arduino_HWSPI.h"
@@ -30,6 +33,7 @@
 #include "display/Arduino_ILI9488_3bit.h"
 #endif // !defined(LITTLE_FOOT_PRINT)
 
+#include "display/Arduino_GC9106.h"
 #include "display/Arduino_GC9A01.h"
 #include "display/Arduino_HX8347C.h"
 #include "display/Arduino_HX8347D.h"
@@ -121,7 +125,7 @@
 #define TFT_DC 27
 #define TFT_RST 26
 #define TFT_BL 28
-#elif defined(ESP32)
+#elif CONFIG_IDF_TARGET_ESP32
 #define TFT_SCK 18
 #define TFT_MOSI 23
 #define TFT_MISO -1
@@ -129,6 +133,19 @@
 #define TFT_DC 27
 #define TFT_RST 33
 #define TFT_BL 22
+#elif CONFIG_IDF_TARGET_ESP32S2
+#define TFT_SCK 36
+#define TFT_MOSI 35
+#define TFT_MISO -1
+#define TFT_CS 34
+#define TFT_DC 26
+#define TFT_RST 33
+#define TFT_BL 21
+#elif CONFIG_IDF_TARGET_ESP32C3
+#define TFT_CS 7
+#define TFT_DC 2
+#define TFT_RST 1
+#define TFT_BL 3
 #elif defined(ESP8266)
 #define TFT_CS 15
 #define TFT_DC 4
