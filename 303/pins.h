@@ -9,9 +9,11 @@
 #define  DECAY_PIN        A5
 #define  TEMPO_PIN        A6
 
-#define   SHIFT_PIN       2
-#define   STEP_PIN        3
+#define  PLAY_PIN         2
+#define  WAVEFORM_PIN     3
+#define  RECORD_PIN       4
+#define  RECORD_LED       5
 
-#define LED 13
+#define   LED 13
 
 #endif

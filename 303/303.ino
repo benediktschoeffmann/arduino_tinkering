@@ -28,15 +28,24 @@ enum OscType {
   squareWave,
   triangle
 };
-
+/*
+enum State {
+  stopped,
+  play,
+  recording
+};
+*/
 enum OscType oscType = saw;
+
+// enum State state = stopped;
 
 EventDelay noteChange;
 LowPassFilter lpf;
 ADSR <CONTROL_RATE, CONTROL_RATE> envelope;
 
-PinButton oscToggle(2);
-PinButton playButton(3);
+PinButton oscToggle(WAVEFORM_PIN);
+PinButton playButton(PLAY_PIN);
+PinButton recordButton(RECORD_PIN);
 
 PinButton buttons[2] = {
   oscToggle,
@@ -44,6 +53,7 @@ PinButton buttons[2] = {
 };
 
 boolean playing = true;
+boolean recording = false;
 boolean led = false;
 
 int pattern[8] = {0, 0, 3, 5, 0, 7, 0, 12};
@@ -51,12 +61,15 @@ int patternIndex = 0;
 int oct = 2;
 int freq = 440;
 int tempo = 80;
+int key = 0;
 int attack_level, attack, decay_level, decay, sustain, release_ms, cutoff, resonance, gain;
 uint16_t cutoff_freq;
 
 void setup() {
-  pinMode(2, INPUT_PULLUP);
-  pinMode(3, INPUT_PULLUP);
+  pinMode(PLAY_PIN, INPUT_PULLUP);
+  pinMode(WAVEFORM_PIN, INPUT_PULLUP);
+  pinMode(RECORD_PIN, INPUT_PULLUP);
+  pinMode(RECORD_LED, OUTPUT);
   
   pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(115200);
@@ -72,13 +85,14 @@ void updateControl() {
 
   playButton.update();
   oscToggle.update();
+  recordButton.update();
   
   if (playButton.isClick() || playButton.isSingleClick()) {
     ledEvent();
     playing = !playing;
   }
 
-  if (oscToggle.isClick() || playButton.isSingleClick()) {
+  if (oscToggle.isClick() || oscToggle.isSingleClick()) {
     ledEvent();
     
     if (oscType == saw) {
@@ -93,6 +107,17 @@ void updateControl() {
     }
   }
 
+  if (recordButton.isClick() || recordButton.isSingleClick()) {
+    recording = !recording;
+    if (recording) {
+      digitalWrite(RECORD_LED, HIGH);
+      playing = false;
+      patternIndex = 0;
+    } else {
+      digitalWrite(RECORD_LED, LOW);
+    }
+  }
+
   tempo = map(mozziAnalogRead(TEMPO_PIN), 0, 1024, 80, 220);
   oct = map(mozziAnalogRead(OCT_PIN), 0, 1024, 0, 3);
   cutoff = map(mozziAnalogRead(CUTOFF_PIN), 0, 1024, 10, 255);
@@ -101,6 +126,25 @@ void updateControl() {
   decay_level = map(mozziAnalogRead(DECAY_PIN), 0, 1024, 0, 255);
   
   tempo = 60000/(tempo<<1);
+
+  if (recording) {
+    key = mozziAnalogRead(KEYS_PIN);
+    for (int i=0; i < 13; i++) {
+      if (KEYS[i] == key) {
+        pattern[patternIndex] = i;
+        patternIndex++;
+        break;
+      }
+    }
+
+    if (patternIndex == 8) {
+      digitalWrite(RECORD_LED, LOW);
+      patternIndex = 0;
+      recording = false;  
+    }
+  }
+
+  
   if (noteChange.ready() && playing) {
 
     // ADSR
